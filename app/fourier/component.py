@@ -1,4 +1,3 @@
-# fourier/component.py
 import cmath
 
 class FourierComponent:
@@ -23,6 +22,7 @@ class FourierComponent:
         return {
             "index[k]": self.k,
             "frecuency": self.frequency,
+            "value": self.value,
             "magnitude": self.magnitude,
             "phase": self.phase
         }
