@@ -35,7 +35,7 @@ class GraphFrecuency:
     def graph_magnitude_spectrum(self):
         """Grafica el espectro de magnitud"""
         plt.figure(figsize=(10,5))
-        plt.plot(self.frequencies, self.magnitudes, marker="o")
+        plt.plot(self.frequencies, self.magnitudes, marker="o", color="blue")
         plt.title("Espectro de la señal (FFT)")
         plt.xlabel("Frecuencia (Hz)")
         plt.ylabel("Magnitud")
@@ -61,7 +61,7 @@ class GraphFrecuency:
         imag_parts = [c.imag for c in self.values[:self.N//2]]
 
         plt.figure(figsize=(6,6))
-        plt.scatter(real_parts, imag_parts, marker="o")
+        plt.scatter(real_parts, imag_parts, marker="o", color="green")
         plt.title("Coeficientes FFT en plano complejo")
         plt.xlabel("Parte real")
         plt.ylabel("Parte imaginaria")
@@ -74,7 +74,7 @@ class GraphFrecuency:
         magnitudes_db = [20*math.log10(m) if m > 0 else -float("inf") for m in self.magnitudes]
 
         plt.figure(figsize=(10,5))
-        plt.plot(self.frequencies, magnitudes_db, marker="o")
+        plt.plot(self.frequencies, magnitudes_db, marker="o", color="red")
         plt.title("Espectro unilateral en dB")
         plt.xlabel("Frecuencia (Hz)")
         plt.ylabel("Magnitud (dB)")

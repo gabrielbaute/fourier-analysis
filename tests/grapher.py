@@ -10,7 +10,7 @@ fs = 100.0  # frecuencia de muestreo en Hz (ejemplo)
 
 # Calculamos la FFT
 fourier = Fourier(datos, fs)
-componentes = fourier._fft_components()  # lista de FourierComponent
+componentes = fourier.fft_components()  # lista de FourierComponent
 
 # Graficamos el espectro de magnitud
 grapher = GraphFrecuency(componentes)

@@ -38,16 +38,25 @@ class Fourier:
         factor = [self.get_transform_kernel(k, N) * impares[k] for k in range(N//2)]
         return [pares[k] + factor[k] for k in range(N//2)] + \
                [pares[k] - factor[k] for k in range(N//2)]
-   
-    def fft_components(self, x=None) -> list[FourierComponent]:
+
+    def fft_components(self) -> list[FourierComponent]:
+        """Versión FFT que devuelve FourierComponent para análisis didáctico."""
+        coeficientes = self.fft(self.x)
+        resultado = []
+        for k, val in enumerate(coeficientes):
+            freq = self.fs * k / self.N
+            resultado.append(FourierComponent(k, freq, val))
+        return resultado
+ 
+    def fft_components_explain(self, x=None) -> list[FourierComponent]:
         if x is None:
             x = self.x
         N = len(x)
         if N <= 1:
             return [FourierComponent(0, 0.0, x[0])]
 
-        pares = self.fft_components(x[0::2])
-        impares = self.fft_components(x[1::2])
+        pares = self.fft_components_explain(x[0::2])
+        impares = self.fft_components_explain(x[1::2])
 
         resultado = []
         for k in range(N//2):
@@ -66,11 +75,3 @@ class Fourier:
         return resultado
 
 
-    def _fft_components(self) -> list[FourierComponent]:
-        """Versión FFT que devuelve FourierComponent para análisis didáctico."""
-        coeficientes = self.fft(self.x)
-        resultado = []
-        for k, val in enumerate(coeficientes):
-            freq = self.fs * k / self.N
-            resultado.append(FourierComponent(k, freq, val))
-        return resultado
