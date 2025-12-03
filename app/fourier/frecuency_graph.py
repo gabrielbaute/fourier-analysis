@@ -1,4 +1,5 @@
 import math
+import logging
 import numpy as np
 import matplotlib.pyplot as plt
 from app.fourier.component import FourierComponent
@@ -10,6 +11,7 @@ class GraphFrecuency:
         self.magnitudes = [c.magnitude for c in componentes]
         self.phases = [c.phase for c in componentes]
         self.N = len(self.frequencies)
+        self.logger = logging.getLogger(f"{self.__class__.__name__}")
 
     def print_magnitude_spectrum(self):
         """Imprime el espectro de magnitud"""
@@ -34,6 +36,7 @@ class GraphFrecuency:
 
     def graph_magnitude_spectrum(self):
         """Grafica el espectro de magnitud"""
+        self.logger.info("Graficando espectro de magnitud...")
         plt.figure(figsize=(10,5))
         plt.plot(self.frequencies, self.magnitudes, marker="o", color="blue")
         plt.title("Espectro de la señal (FFT)")
@@ -44,6 +47,7 @@ class GraphFrecuency:
 
     def graph_phase_spectrum(self):
         """Grafica el espectro de fase"""
+        self.logger.info("Graficando espectro de fase...")
         frequencies = self.frequencies[:self.N//2]
         phases = np.unwrap(self.phases[:self.N//2])  # suaviza saltos
 
@@ -57,6 +61,7 @@ class GraphFrecuency:
 
     def graph_complex_spectrum(self):
         """Grafica el espectro complejo (parte real e imaginaria)"""
+        self.logger.info("Graficando espectro complejo...")
         real_parts = [c.real for c in self.values[:self.N//2]]
         imag_parts = [c.imag for c in self.values[:self.N//2]]
 
@@ -71,6 +76,7 @@ class GraphFrecuency:
     
     def graph_magnitude_db_spectrum(self):
         """Grafica el espectro de magnitud en dB"""
+        self.logger.info("Graficando espectro de magnitud en dB...")
         magnitudes_db = [20*math.log10(m) if m > 0 else -float("inf") for m in self.magnitudes]
 
         plt.figure(figsize=(10,5))

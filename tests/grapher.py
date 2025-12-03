@@ -1,5 +1,8 @@
+import logging
 from app.fourier import Fourier, GraphFrecuency
 from app.signal_procesor import Signal
+
+logging.basicConfig(level=logging.INFO)
 
 signal = Signal(port="COM15")
 datos = signal.read_values()
